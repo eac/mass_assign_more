@@ -5,9 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "mass_assign_more"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
-    gem.email = "eric@chapweske.com"
+    gem.summary = %Q{ActiveRecord extension to expand accessible attributes based on context.}
+    gem.description = %Q{Allows attr_accessible to be temporarily expanded depending on the context.
+    For example, an admin wishing to change their account should be able to mass assign
+    more attributes than a non-admin.}
+    gem.email = "Send messages to http://github.com/eac"
     gem.homepage = "http://github.com/eac/mass_assign_more"
     gem.authors = ["Eric Chapweske"]
     gem.add_development_dependency "thoughtbot-shoulda"
