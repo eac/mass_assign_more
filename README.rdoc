@@ -1,5 +1,7 @@
 = mass assign more
 
+Note: Builds off mass assignment refactoring patch. Doesn't work with edge Rails yet.
+
 Context-based mass assignment for Rails. Depends on ActiveRecord/MassAssignmentSecurity
 
 Install: sudo gem install mass_assign_more
