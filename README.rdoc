@@ -4,11 +4,12 @@ Note: Builds off mass assignment refactoring patch. Doesn't work with edge Rails
 
 Context-based mass assignment for Rails. Depends on ActiveRecord/MassAssignmentSecurity
 
-Install: sudo gem install mass_assign_more
+== Install
+   sudo gem install mass_assign_more
 
 == The Basic Idea
 
-Allows attr_accessible to be temporarily expanded depending on the context.
+Allows +attr_accessible+ to be temporarily expanded depending on the context.
 For example, an admin wishing to change their account should be able to mass assign
 more attributes than a non-admin. 
 
@@ -17,34 +18,34 @@ more attributes than a non-admin.
 Here's one use case with a model. This could just as easily be a controller or any object. See /examples for details.
 
 In examples/model.rb:
-
-class Account < ActiveRecord::Base
-  include MassAssignMore::Context
   
-  belongs_to :user
-  
-  attr_accessible :name
-  accessible_attributes[:admin] = [ :plan_id ]
-  
-  protected
-  
-  # Assumes User#role returns :admin when appropriate.
-  def mass_assignment_context
-    user.role if user
+  class Account < ActiveRecord::Base
+    include MassAssignMore::Context
+    
+    belongs_to :user
+    
+    attr_accessible :name
+    accessible_attributes[:admin] = [ :plan_id ]
+    
+    protected
+    
+    # Assumes User#role returns :admin when appropriate.
+    def mass_assignment_context
+      user.role if user
+    end
+    
   end
   
-end
-
-@account.user.role
-# => nil
-@account.attributes = { :name => "Eric's Account", :plan_id => 5 }
-@account.attributes
-# => { :name => "Eric's Account" }
-
-@account.user.role = :admin
-@account.attributes = { :plan_id => 5 }
-@account.attributes
-# => { :name => "Eric's Account", :plan_id => 5 }
+  @account.user.role
+  # => nil
+  @account.attributes = { :name => "Eric's Account", :plan_id => 5 }
+  @account.attributes
+  # => { :name => "Eric's Account" }
+  
+  @account.user.role = :admin
+  @account.attributes = { :plan_id => 5 }
+  @account.attributes
+  # => { :name => "Eric's Account", :plan_id => 5 }
 
 == Enjoy
 

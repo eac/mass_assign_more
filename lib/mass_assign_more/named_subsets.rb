@@ -2,10 +2,10 @@ module MassAssignMore
   # Adds support for named subsets, as well as merging those subsets with itself:
   #
   # Example:
-  # permissions = PermissionSet[ 'name' ]
-  # permissions[:admin] = [ 'plan_id' ]
-  # permissions.with(:admin)
-  # => PermissionSet[ 'name', 'plan_id' ]
+  #   permissions = PermissionSet[ 'name' ]
+  #   permissions[:admin] = [ 'plan_id' ]
+  #   permissions.with(:admin)
+  #   => PermissionSet[ 'name', 'plan_id' ]
   #
   module NamedSubsets # :nodoc:
   
@@ -16,10 +16,10 @@ module MassAssignMore
     # Assigns a subset, storing the values using an instance of the current container's class.
     #
     # Example:
-    # permissions = PermissionSet[ 'name' ]
-    # permissions[:admin] = [ 'plan_id' ]
-    # permissions[:admin]
-    # => PermissionSet[ 'plan_id' ]
+    #   permissions = PermissionSet[ 'name' ]
+    #   permissions[:admin] = [ 'plan_id' ]
+    #   permissions[:admin]
+    #   => PermissionSet[ 'plan_id' ]
     #
     def []=(key, values)
       named_subsets[key] += values
@@ -29,13 +29,13 @@ module MassAssignMore
       dup.with!(*keys)
     end
     
-    # Combines sublists with itself.
+    # Combines subsets with itself.
     #
     # Example:
-    # permissions = PermissionSet[ 'name' ]
-    # permissions[:admin] = [ 'plan_id' ]
-    # permissions.with!(:admin)
-    # => PermissionSet[ 'name', 'plan_id' ]
+    #   permissions = PermissionSet[ 'name' ]
+    #   permissions[:admin] = [ 'plan_id' ]
+    #   permissions.with!(:admin)
+    #   => PermissionSet[ 'name', 'plan_id' ]
     #
     def with!(*keys)
       named_subsets.values_at(*keys).each { |named_subset| merge(named_subset) }
