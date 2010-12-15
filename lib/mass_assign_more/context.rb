@@ -7,39 +7,39 @@ module MassAssignMore
   #
   #   class Account < ActiveRecord::Base
   #     include MassAssignMore::Context
-  #   
+  #
   #     attr_accessible :first_name
   #     accessible_attributes['admin'] = [ :plan_id ]
-  #   
+  #
   #     protected
-  #   
+  #
   #     alias_method :mass_assignment_context, :role
-  #   
+  #
   #   end
-  #   
+  #
   #   account = Account.new
   #   account.attributes = { :first_name => 'Eric', :plan_id => 5 }
   #   account.attributes # => { :first_name => 'Eric' }
-  #   
+  #
   #   account.role = 'admin'
   #   account.attributes = { :plan_id => 5 }
   #   account.attributes # => { :first_name => 'Eric', :plan_id => 5 }
   #
   module Context
-    extend ActiveSupport::Concern
 
-    included do
-      accessible_attributes.extend NamedSubsets
+    def self.included(base)
+      base.accessible_attributes.extend(NamedSubsets)
     end
-    
+
     protected
-    
+
+    # TODO Cache here
     def mass_assignment_authorizer # :nodoc:
       super.with(mass_assignment_context)
     end
-    
+
     # Redefine to return the name of an accessible_attribute context:
-    # 
+    #
     #   # attr_accessible :first_name
     #   # accessible_attributes['admin'] = [ :plan_id ]
     #   #
@@ -49,6 +49,6 @@ module MassAssignMore
     #
     def mass_assignment_context
     end
-    
+
   end
 end
