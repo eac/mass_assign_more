@@ -3,11 +3,11 @@ module MassAssignMore
 
     def self.included(base)
       base.class_eval do
-        undef(*MassAssignMore::Compatibility.mass_assignment_instance_methods)
+        MassAssignMore::Compatibility.mass_assignment_instance_methods.each { |instance_method| undef instance_method }
       end
 
       base.instance_eval do
-        undef(*MassAssignMore::Compatibility.mass_assignment_class_methods)
+        MassAssignMore::Compatibility.mass_assignment_class_methods.each { |class_method| undef class_method }
       end
 
     end
