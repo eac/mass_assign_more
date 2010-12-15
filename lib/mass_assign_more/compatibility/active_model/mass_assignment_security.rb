@@ -1,3 +1,4 @@
+require 'mass_assign_more/compatibility'
 require 'active_support/core_ext/class/attribute.rb'
 require 'active_model/mass_assignment_security/permission_set'
 
