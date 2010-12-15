@@ -2,8 +2,6 @@ module MassAssignMore
   module Compatibility
 
     def self.included(base)
-      $LOAD_PATH << File.join(File.dirname(__FILE__), 'active_model')
-
       base.instance_eval do
         remove_method(*MassAssignMore::Compatibility.mass_assignment_instance_methods)
       end

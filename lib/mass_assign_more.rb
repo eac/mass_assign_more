@@ -4,8 +4,7 @@ module MassAssignMore # :nodoc:
   begin
     require 'active_model/mass_assignment_security'
   rescue LoadError
-    warn "Failed to load active model's mass assignment security module, falling back to compatibility version"
-    require 'mass_assign_more/compatibility'
+    $LOAD_PATH << File.join(File.dirname(__FILE__), 'mass_assign_more', 'compatibility')
   end
 
 end
