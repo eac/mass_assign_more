@@ -28,7 +28,7 @@ module MassAssignMore
   module Context
 
     def self.included(base)
-      base.accessible_attributes.extend(NamedSubsets)
+      ActiveModel::MassAssignmentSecurity::WhiteList.send(:include, NamedSubsets)
     end
 
     protected
